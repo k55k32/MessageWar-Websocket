@@ -124,7 +124,7 @@ function sendMessageOne (type, data, sid) {
     ws.send(toMsg)
   } catch(e) {
     userExit(sid)
-    console.error('send message error' , e);
+    console.error('send message error: ' , e);
   }
 }
 
