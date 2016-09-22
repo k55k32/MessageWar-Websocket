@@ -83,30 +83,6 @@ wss.on('connection', function (ws) {
     function sendLog(msg) {
       sendMessage('log', msg)
     }
-    function execTask (phone) {
-      var source = taskList[phone]
-      source.map(function (tag) {
-        var keyObj = smslist[tag] || {}
-        var sendFunction = keyObj[1]
-        if (typeof sendFunction === 'function') {
-          sendFunction(phone).then((result) => {
-            sendMessage('result', {
-              phone: phone,
-              type: tag,
-              data: result,
-              success: true
-            })
-            var index = source.indexOf(tag);
-            if (index > -1) {
-                source.splice(index, 1);
-            }
-          })
-        } else {
-          sendMessage('result', {phone: phone, type: tag, success: false, msg: 'not that type of source'})
-        }
-        console.log(tag)
-      })
-    }
   }
 });
 
